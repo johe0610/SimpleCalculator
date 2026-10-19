@@ -1,25 +1,19 @@
-#import pynput
-#
-#def main():
-#    print("Hello, World!")
-#
-#    # input
-#    num1 = int(input())
-#    num2 = int(input())
-#
-#    # printing the sum in integer
-#    print(num1 + num2)
-#
-#if __name__ == "__main__":
-#    main()
-
 from pynput import keyboard
+import re
 
 typed_chars = []
 
+def do_calculation(input_string):
+    # Example calculation: count the number of characters typed
+    char_count = len(input_string)
+    print(f"Number of characters typed: {char_count}")
+
 def on_press(key):
+    #pattern = r"^-?\d+\.\d+$"
+    #if re.match(pattern, key.char):
+    #    typed_chars.append(key.char)
+
     try:
-        #print(f"Key pressed: {key.char!r}")
         typed_chars.append(key.char)
     except AttributeError:
         print(f"Special key pressed: {key}")
@@ -34,6 +28,13 @@ def main():
     print("Ouptput:")
     with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
         listener.join()
+
+    #controller = keyboard.Controller()
+    #        #controller.type("ls")
+    #controller.press(keyboard.Key.backspace)
+    #controller.release(keyboard.Key.enter)
+            
+    
 
 if __name__ == "__main__":
     main()
